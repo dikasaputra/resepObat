@@ -1,12 +1,39 @@
-<h1> VIEW </h1>
-<a href="main/create"> CREATE </a>
-@foreach($var as $var)
-    <p> {{ $var->NomorPendf}} </p>
-    <p> {{ $var->TanggalPendf}} </p>
-    <p> {{ $var->KodeDkt}} </p>
-    <p> {{ $var->KodePsn}} </p>
-    <p> {{ $var->KodePlk}} </p>
-    <p> {{ $var->Biaya}} </p>
-    <p> {{ $var->Ket}} </p>
-    <hr>
-@endforeach
+<h1> pendaftaran </h1>
+<a href="pendaftaran/create"> CREATE </a>
+
+<!-- STYLE MULAI DISINI -->
+<style>
+
+table {
+    border-collapse: collapse;
+}
+
+table, td, th {
+    border: 1px solid black;
+}
+
+</style>
+
+<!-- TABLE MULAI DISINI -->
+<table>
+    <tr>
+        <th>Nomor Pendaftaran</th>
+        <th>Tanggal Pendaftaran</th>
+        <th>Kode Dokter</th>
+        <th>Kode Pasien</th>
+        <th>Kode Poliklinik</th>
+        <th>Biaya Pendaftaran</th>
+        <th>Keterangan</th>
+    </tr>
+    @foreach($var as $var)
+        <tr>
+            <td>{{ $var->NomorPendf}}</td>
+            <td>{{ $var->TanggalPendf}}</td>
+            <td>{{ $var->KodeDkt}}</td>
+            <td>{{ $var->KodePsn}}</td>
+            <td>{{ $var->KodePlk}}</td>
+            <td>{{ $var->Biaya}}</td>
+            <td>{{ $var->Ket}}</td>
+        </tr>
+    @endforeach
+</table>

@@ -27,6 +27,7 @@ class daftarController extends Controller
     public function create()
     {
         //
+        return view('pendaftaran.create');
     }
 
     /**
@@ -38,6 +39,19 @@ class daftarController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, [
+           'tgl' => 'required', 'dok' => 'required', 'pas' => 'required', 'pol' => 'required', 'biaya' => 'required', 'ket' => 'required',
+        ]);
+
+        $var = new daftar;
+        $var->TanggalPendf = $request->tgl;
+        $var->KodeDkt = $request->dok;
+        $var->KodePsn = $request->pas;
+        $var->KodePlk = $request->pol;
+        $var->Biaya = $request->biaya;
+        $var->Ket = $request->ket;
+        $var->save();
+        return redirect('pendaftaran');
     }
 
     /**

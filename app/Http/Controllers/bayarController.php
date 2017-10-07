@@ -27,6 +27,7 @@ class bayarController extends Controller
     public function create()
     {
         //
+        return view('pembayaran.create');
     }
 
     /**
@@ -38,6 +39,16 @@ class bayarController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, [
+           'pas' => 'required', 'tgl' => 'required', 'bay' => 'required',
+        ]);
+
+        $var = new bayar;
+        $var->KodePsn = $request->pas;
+        $var->TanggalByr = $request->tgl;
+        $var->JumlahByr = $request->bay;
+        $var->save();
+        return redirect('pembayaran');
     }
 
     /**
@@ -60,6 +71,12 @@ class bayarController extends Controller
     public function edit($id)
     {
         //
+        $var = bayar::find($id);
+        if(!$var){
+            abort(404);
+        }
+
+        return view('pembayaran.edit')->with('var', $var);
     }
 
     /**
