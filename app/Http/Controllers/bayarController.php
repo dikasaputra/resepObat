@@ -71,7 +71,10 @@ class bayarController extends Controller
     public function edit($id)
     {
         //
-        $var = bayar::where('NomorByr',$id)->firstOrFail();
+        //Find primaryKey kalau belum di set di model
+        //$var = bayar::where('NomorByr',$id)->firstOrFail();
+
+        $var = bayar::find($id);
         if(!$var){
             abort(404);
         }
@@ -93,14 +96,15 @@ class bayarController extends Controller
            'pas' => 'required', 'tgl' => 'required', 'bay' => 'required',
         ]);
 
-        // $var = bayar::where('NomorByr',$id)->firstOrFail();
-        // $var->KodePsn = $request->pas;
-        // $var->TanggalByr = $request->tgl;
-        // $var->JumlahByr = $request->bay;
-        // $var ->save();
+        $var = bayar::find($id);
+        $var->KodePsn = $request->pas;
+        $var->TanggalByr = $request->tgl;
+        $var->JumlahByr = $request->bay;
+        $var ->save();
 
-        bayar::where('NomorByr', $id)
-                    ->update(['KodePsn' => $request->pas, 'TanggalByr' => $request->tgl, 'JumlahByr' => $request->bay]);
+        // Kodingan kalau primaryKey belum di set di model
+        // bayar::where('NomorByr', $id)
+        //             ->update(['KodePsn' => $request->pas, 'TanggalByr' => $request->tgl, 'JumlahByr' => $request->bay]);
 
         return redirect('pembayaran');
     }
@@ -114,5 +118,8 @@ class bayarController extends Controller
     public function destroy($id)
     {
         //
+        $var = bayar::find($id);
+        $var ->delete();
+        return redirect('pembayaran');
     }
 }

@@ -29,7 +29,14 @@ table, td, th {
             <td>{{ $var->KodePsn}}</td>
             <td>{{ $var->TanggalByr}}</td>
             <td>{{ $var->JumlahByr}}</td>
-            <td><a href="/pembayaran/{{$var->NomorByr}}/edit"> Edit</a></td>
+            <td>
+                <a href="/pembayaran/{{$var->NomorByr}}/edit"> Edit</a>
+                <form action="/pembayaran/{{$var->NomorByr}}" method="post">
+                    <input type="hidden" value="{{ csrf_token() }}" name="_token">
+                    <input type="hidden" value="delete" name="_method">
+                    <input type="submit" value="delete">
+                </form>
+            </td>
         </tr>
     @endforeach
 </table>
