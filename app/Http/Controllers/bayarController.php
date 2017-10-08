@@ -71,7 +71,7 @@ class bayarController extends Controller
     public function edit($id)
     {
         //
-        $var = bayar::find($id);
+        $var = bayar::where('NomorByr',$id)->firstOrFail();
         if(!$var){
             abort(404);
         }
@@ -89,6 +89,20 @@ class bayarController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $this->validate($request, [
+           'pas' => 'required', 'tgl' => 'required', 'bay' => 'required',
+        ]);
+
+        // $var = bayar::where('NomorByr',$id)->firstOrFail();
+        // $var->KodePsn = $request->pas;
+        // $var->TanggalByr = $request->tgl;
+        // $var->JumlahByr = $request->bay;
+        // $var ->save();
+
+        bayar::where('NomorByr', $id)
+                    ->update(['KodePsn' => $request->pas, 'TanggalByr' => $request->tgl, 'JumlahByr' => $request->bay]);
+
+        return redirect('pembayaran');
     }
 
     /**

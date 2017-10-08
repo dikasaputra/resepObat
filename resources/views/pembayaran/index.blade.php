@@ -21,6 +21,7 @@ table, td, th {
         <th>Kode Pasien</th>
         <th>Tanggal Pembayaran</th>
         <th>Jumlah Pembayaran</th>
+        <th>Action</th>
     </tr>
     @foreach($var as $var)
         <tr>
@@ -28,6 +29,7 @@ table, td, th {
             <td>{{ $var->KodePsn}}</td>
             <td>{{ $var->TanggalByr}}</td>
             <td>{{ $var->JumlahByr}}</td>
+            <td><a href="/pembayaran/{{$var->NomorByr}}/edit"> Edit</a></td>
         </tr>
     @endforeach
 </table>
